@@ -3,7 +3,7 @@ from flask import Flask, request
 from flask import typing as flask_typing
 import requests
 
-from Lecture_2.ht_template.job1.bll.sales_api import save_sales_to_local_disk
+from job1.bll.sales_api import save_sales_to_local_disk
 
 
 
