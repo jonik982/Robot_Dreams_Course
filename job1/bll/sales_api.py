@@ -1,6 +1,6 @@
 import os
 
-from Lecture_2.ht_template.job1.dal import local_disk, sales_api
+from job1.dal import local_disk, sales_api
 
 
 
