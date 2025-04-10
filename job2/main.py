@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request
 from flask import typing as flask_typing
-from Lecture_2.ht_template.job2.JSON_to_AVRO import save_sales_from_apifile
+from job2.JSON_to_AVRO import save_sales_from_apifile
 
 
 app = Flask(__name__)
