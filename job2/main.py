@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request
 from flask import typing as flask_typing
-from job2.JSON_to_AVRO import save_sales_from_apifile
+from Lecture_2.ht_template.job2.JSON_to_AVRO import save_sales_from_apifile
 
 
 app = Flask(__name__)
@@ -16,7 +16,14 @@ def main() -> flask_typing.ResponseReturnValue:
 
     save_sales_from_apifile(stg_dir, raw_dir)
 
-    return {
+
+
+    if save_sales_from_apifile(stg_dir, raw_dir) is False:
+        return {
+            "message": "No data found for this date"
+        }, 400
+    else:
+        return {
         "message": "Data retrieved successfully in AVRO from raw_dir",
     }, 201
 
