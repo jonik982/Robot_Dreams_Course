@@ -1,7 +1,8 @@
-from fastavro import json_writer, parse_schema, writer
+from fastavro import json_writer, parse_schema, writer, validate
 import requests
 import json
 import os
+
 
 
 
@@ -43,25 +44,40 @@ def save_sales_from_apifile(stg_dir: str, raw_dir: str) -> None:
 
 
 
-
-    stg_dir_name = filename.split('.')[0] + '.avro'
-    stg_dir_path = os.path.join(stg_dir, stg_dir_name)
+    if "No data found for date" not in json.dumps(x):
 
 
-
-    if os.path.exists(stg_dir_path):
-        os.remove(stg_dir_path)
-
-    if os.path.exists(stg_dir):
-        os.rmdir(stg_dir)
-
-
-    if not os.path.exists(stg_dir):
-        os.mkdir(stg_dir)
+        stg_dir_name = filename.split('.')[0] + '.avro'
+        stg_dir_path = os.path.join(stg_dir, stg_dir_name)
 
 
 
+        if os.path.exists(stg_dir_path):
+            os.remove(stg_dir_path)
 
-    with open(stg_dir_path, 'wb') as out:
-        writer(out, schemaafterparse,x)
+        if os.path.exists(stg_dir):
+            os.rmdir(stg_dir)
+
+
+        if not os.path.exists(stg_dir):
+            os.mkdir(stg_dir)
+
+
+
+
+        with open(stg_dir_path, 'wb') as out:
+            writer(out, schemaafterparse,x)
+
+        return True
+
+    else:
+        return False
+
+
+
+
+
+
+
+
 
